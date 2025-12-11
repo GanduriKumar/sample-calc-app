@@ -43,6 +43,14 @@ Key endpoints (set `session-id` header after creating a session):
 - `POST /clear`
 - Memory: `POST /memory/clear`, `/memory/recall`, `/memory/add`, `/memory/subtract`
 
+### Run the React frontend (Vite)
+From `frontend/`:
+```powershell
+npm install
+npm run dev
+```
+Defaults to http://localhost:5173 and expects the API at http://localhost:8000 (override with `VITE_API_BASE_URL`).
+
 Commands inside the prompt:
 - Digits / `.` to build a number
 - `+` `-` `*` `/` select operator
