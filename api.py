@@ -4,11 +4,21 @@ from typing import Dict
 from uuid import uuid4
 
 from fastapi import FastAPI, Header, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from calculator import Calculator
 
 app = FastAPI(title="Calculator API", version="1.0.0")
+
+# Allow local dev frontend (Vite default) and other origins for development.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # In-memory session store. Not suitable for production clustering.
 _sessions: Dict[str, Calculator] = {}

@@ -13,7 +13,6 @@ import {
   memoryAdd,
   memorySubtract,
 } from "./api";
-import "./index.css";
 
 const digits = [
   ["7", "8", "9"],
