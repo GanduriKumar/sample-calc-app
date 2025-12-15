@@ -1,0 +1,12 @@
+{
+  "precision": 10,
+  "logging": {
+    "level": "INFO",
+    "file": "calculator.log"
+  },
+  "features": {
+    "trigonometry": true,
+    "square_root": true,
+    "history": true
+  }
+}
