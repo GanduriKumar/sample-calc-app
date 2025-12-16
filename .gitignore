@@ -1,0 +1,12 @@
+# .gitignore file contents
+# Ignore all Python files and directories
+*~
+*.py
+__pycache__/
+*.egg-info/
+dist/
+build/
+*.zip
+*.tar.gz
+.venv/
+frontend/my-react-app/node_modules/
