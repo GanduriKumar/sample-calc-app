@@ -7,6 +7,10 @@ export interface CalculationRequest {
     b: number;
 }
 
+export interface SingleNumberRequest {
+    x: number;
+}
+
 export interface CalculationResponse {
     result: number;
 }
@@ -23,15 +27,13 @@ const api = axios.create({
 });
 
 export const calculatorAPI = {
+    // Basic operations
     add: async (data: CalculationRequest): Promise<number> => {
         try {
             const response = await api.post<CalculationResponse>('/add', data);
             return response.data.result;
         } catch (error: any) {
-            if (error.response?.data?.error) {
-                throw new Error(error.response.data.error);
-            }
-            throw new Error('Error calculating addition');
+            throw new Error(error.response?.data?.detail || 'Error calculating addition');
         }
     },
 
@@ -40,10 +42,7 @@ export const calculatorAPI = {
             const response = await api.post<CalculationResponse>('/subtract', data);
             return response.data.result;
         } catch (error: any) {
-            if (error.response?.data?.error) {
-                throw new Error(error.response.data.error);
-            }
-            throw new Error('Error calculating subtraction');
+            throw new Error(error.response?.data?.detail || 'Error calculating subtraction');
         }
     },
 
@@ -52,25 +51,98 @@ export const calculatorAPI = {
             const response = await api.post<CalculationResponse>('/multiply', data);
             return response.data.result;
         } catch (error: any) {
-            if (error.response?.data?.error) {
-                throw new Error(error.response.data.error);
-            }
-            throw new Error('Error calculating multiplication');
+            throw new Error(error.response?.data?.detail || 'Error calculating multiplication');
         }
     },
 
     divide: async (data: CalculationRequest): Promise<number> => {
         try {
             const response = await api.post<CalculationResponse>('/divide', data);
-            if ('error' in response.data) {
-                throw new Error((response.data as any).error);
-            }
             return response.data.result;
         } catch (error: any) {
-            if (error.response?.data?.error) {
-                throw new Error(error.response.data.error);
-            }
-            throw new Error('Error calculating division');
+            throw new Error(error.response?.data?.detail || 'Error calculating division');
+        }
+    },
+
+    // Scientific operations (single number)
+    sin: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/sin', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating sine');
+        }
+    },
+
+    cos: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/cos', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating cosine');
+        }
+    },
+
+    tan: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/tan', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating tangent');
+        }
+    },
+
+    log: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/log', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating logarithm');
+        }
+    },
+
+    log10: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/log10', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating log10');
+        }
+    },
+
+    exp: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/exp', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating exponential');
+        }
+    },
+
+    sqrt: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/sqrt', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating square root');
+        }
+    },
+
+    power: async (data: CalculationRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/power', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating power');
+        }
+    },
+
+    factorial: async (data: SingleNumberRequest): Promise<number> => {
+        try {
+            const response = await api.post<CalculationResponse>('/factorial', data);
+            return response.data.result;
+        } catch (error: any) {
+            throw new Error(error.response?.data?.detail || 'Error calculating factorial');
         }
     },
 };
