@@ -1,24 +1,33 @@
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply m-0 p-0 box-border;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply m-0;
+  }
+
+  a {
+    @apply no-underline;
+    color: inherit;
+  }
+
+  ul {
+    @apply list-none p-0;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-button {
-  cursor: pointer;
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors;
+  }
 }

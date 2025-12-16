@@ -3,46 +3,27 @@ import { Link } from 'react-router-dom';
 
 const About: React.FC = () => {
     return (
-        <div style={{ 
-            minHeight: '100vh',
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            padding: '40px'
-        }}>
-            <div style={{
-                maxWidth: '800px',
-                margin: '0 auto',
-                backgroundColor: 'white',
-                padding: '40px',
-                borderRadius: '20px',
-                boxShadow: '0 10px 40px rgba(0, 0, 0, 0.2)'
-            }}>
-                <nav style={{ textAlign: 'center', marginBottom: '30px' }}>
+        <div className="min-h-screen bg-gradient-to-br from-[#667eea] to-[#764ba2] p-10">
+            <div className="max-w-[800px] mx-auto bg-white p-10 rounded-[20px] shadow-[0_10px_40px_rgba(0,0,0,0.2)]">
+                <nav className="text-center mb-8">
                     <Link 
                         to="/" 
-                        style={{ 
-                            color: '#667eea',
-                            fontSize: '16px',
-                            textDecoration: 'none',
-                            border: '2px solid #667eea',
-                            padding: '10px 20px',
-                            borderRadius: '5px',
-                            transition: 'all 0.3s'
-                        }}
+                        className="text-[#667eea] text-base no-underline border-2 border-[#667eea] px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-[#667eea] hover:text-white"
                     >
                         ← Back to Calculator
                     </Link>
                 </nav>
                 
-                <h1 style={{ color: '#2c3e50', textAlign: 'center', marginBottom: '20px' }}>
+                <h1 className="text-calculator-dark text-center mb-5 text-3xl font-bold">
                     About Scientific Calculator
                 </h1>
                 
-                <p style={{ fontSize: '16px', lineHeight: '1.6', color: '#555' }}>
+                <p className="text-base leading-relaxed text-gray-600">
                     This is a full-featured scientific calculator built with FastAPI backend and React frontend.
                 </p>
                 
-                <h2 style={{ color: '#2c3e50', marginTop: '30px', marginBottom: '15px' }}>Features:</h2>
-                <ul style={{ listStyle: 'disc', paddingLeft: '40px', lineHeight: '2', color: '#555' }}>
+                <h2 className="text-calculator-dark mt-8 mb-4 text-2xl font-semibold">Features:</h2>
+                <ul className="list-disc pl-10 leading-loose text-gray-600">
                     <li>Basic arithmetic operations (Addition, Subtraction, Multiplication, Division)</li>
                     <li>Scientific functions (Sin, Cos, Tan, Log, Ln, Exp, Square Root)</li>
                     <li>Power and Factorial calculations</li>
@@ -51,10 +32,11 @@ const About: React.FC = () => {
                     <li>Traditional calculator interface</li>
                 </ul>
                 
-                <h2 style={{ color: '#2c3e50', marginTop: '30px', marginBottom: '15px' }}>Tech Stack:</h2>
-                <ul style={{ listStyle: 'disc', paddingLeft: '40px', lineHeight: '2', color: '#555' }}>
+                <h2 className="text-calculator-dark mt-8 mb-4 text-2xl font-semibold">Tech Stack:</h2>
+                <ul className="list-disc pl-10 leading-loose text-gray-600">
                     <li><strong>Backend:</strong> FastAPI (Python) with Uvicorn server</li>
                     <li><strong>Frontend:</strong> React 18 with TypeScript</li>
+                    <li><strong>Styling:</strong> Tailwind CSS</li>
                     <li><strong>Build Tool:</strong> Vite</li>
                     <li><strong>HTTP Client:</strong> Axios</li>
                     <li><strong>Routing:</strong> React Router v6</li>

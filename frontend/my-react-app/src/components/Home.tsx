@@ -4,27 +4,11 @@ import ScientificCalculator from './ScientificCalculator';
 
 const Home: React.FC = () => {
     return (
-        <div style={{ 
-            minHeight: '100vh', 
-            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            padding: '20px'
-        }}>
-            <nav style={{ 
-                textAlign: 'center', 
-                marginBottom: '20px',
-                padding: '10px'
-            }}>
+        <div className="min-h-screen bg-gradient-to-br from-[#667eea] to-[#764ba2] p-5">
+            <nav className="text-center mb-5 p-2.5">
                 <Link 
                     to="/about" 
-                    style={{ 
-                        color: 'white',
-                        fontSize: '16px',
-                        textDecoration: 'none',
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                        padding: '10px 20px',
-                        borderRadius: '5px',
-                        transition: 'all 0.3s'
-                    }}
+                    className="text-white text-base no-underline bg-white/20 px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-white/30"
                 >
                     About
                 </Link>

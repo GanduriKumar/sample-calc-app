@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { calculatorAPI } from '../services/api';
-import '../styles/ScientificCalculator.css';
 
 const ScientificCalculator: React.FC = () => {
     const [display, setDisplay] = useState<string>('0');
@@ -61,7 +60,6 @@ const ScientificCalculator: React.FC = () => {
             const x = parseFloat(currentValue);
             let radValue = x;
             
-            // Convert to radians if in degree mode for trig functions
             if (mode === 'deg' && ['sin', 'cos', 'tan'].includes(op)) {
                 radValue = (x * Math.PI) / 180;
             }
@@ -167,64 +165,90 @@ const ScientificCalculator: React.FC = () => {
     };
 
     return (
-        <div className="scientific-calculator">
-            <div className="calculator-display">
-                <div className="mode-indicator">{mode.toUpperCase()}</div>
-                <div className="display-screen">{loading ? 'Calculating...' : display}</div>
-                {error && <div className="error-message">{error}</div>}
+        <div className="w-[400px] max-w-[95%] mx-auto my-8 p-5 bg-gradient-to-br from-calculator-dark to-[#34495e] rounded-[20px] shadow-calculator font-sans">
+            {/* Display */}
+            <div className="relative bg-calculator-darker rounded-[10px] p-4 mb-5 min-h-[80px] shadow-[inset_0_2px_10px_rgba(0,0,0,0.5)]">
+                <div className="absolute top-2.5 left-4 text-[10px] text-calculator-blue font-bold bg-[rgba(52,152,219,0.2)] px-2 py-0.5 rounded">
+                    {mode.toUpperCase()}
+                </div>
+                <div className="text-right text-[32px] text-calculator-light font-light tracking-wider break-all min-h-[45px] flex items-center justify-end pt-1.5">
+                    {loading ? 'Calculating...' : display}
+                </div>
+                {error && (
+                    <div className="text-calculator-red text-xs mt-1.5 text-right">
+                        {error}
+                    </div>
+                )}
             </div>
 
-            <div className="calculator-buttons">
+            {/* Buttons */}
+            <div className="grid grid-cols-5 gap-2">
                 {/* Row 1: Mode and Memory */}
-                <button className="btn btn-function" onClick={toggleMode}>{mode}</button>
-                <button className="btn btn-function">MC</button>
-                <button className="btn btn-function">MR</button>
-                <button className="btn btn-function">M+</button>
-                <button className="btn btn-function">M-</button>
+                <button 
+                    onClick={toggleMode}
+                    className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-gray to-[#95a5a6] text-calculator-light hover:from-[#95a5a6] hover:to-calculator-gray active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    {mode}
+                </button>
+                <button className="p-3.5 text-[13px] font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-gray to-[#95a5a6] text-calculator-light hover:from-[#95a5a6] hover:to-calculator-gray active:scale-95">
+                    MC
+                </button>
+                <button className="p-3.5 text-[13px] font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-gray to-[#95a5a6] text-calculator-light hover:from-[#95a5a6] hover:to-calculator-gray active:scale-95">
+                    MR
+                </button>
+                <button className="p-3.5 text-[13px] font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-gray to-[#95a5a6] text-calculator-light hover:from-[#95a5a6] hover:to-calculator-gray active:scale-95">
+                    M+
+                </button>
+                <button className="p-3.5 text-[13px] font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-gray to-[#95a5a6] text-calculator-light hover:from-[#95a5a6] hover:to-calculator-gray active:scale-95">
+                    M-
+                </button>
 
                 {/* Row 2: Scientific functions */}
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('sin')}>sin</button>
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('cos')}>cos</button>
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('tan')}>tan</button>
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('log')}>ln</button>
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('log10')}>log</button>
+                <button onClick={() => handleScientificOperation('sin')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>sin</button>
+                <button onClick={() => handleScientificOperation('cos')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>cos</button>
+                <button onClick={() => handleScientificOperation('tan')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>tan</button>
+                <button onClick={() => handleScientificOperation('log')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>ln</button>
+                <button onClick={() => handleScientificOperation('log10')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>log</button>
 
                 {/* Row 3: More scientific functions */}
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('sqrt')}>√</button>
-                <button className="btn btn-scientific" onClick={() => handleBasicOperation('^')}>x^y</button>
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('exp')}>e^x</button>
-                <button className="btn btn-scientific" onClick={() => handleScientificOperation('factorial')}>x!</button>
-                <button className="btn btn-operation" onClick={handleBackspace}>←</button>
+                <button onClick={() => handleScientificOperation('sqrt')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>√</button>
+                <button onClick={() => handleBasicOperation('^')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>x^y</button>
+                <button onClick={() => handleScientificOperation('exp')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator-blue active:scale-95" disabled={loading}>e^x</button>
+                <button onClick={() => handleScientificOperation('factorial')} className="p-3.5 text-sm font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-blue to-[#2980b9] text-white hover:from-[#2980b9] hover:to-calculator_blue active:scale-95" disabled={loading}>x!</button>
+                <button onClick={handleBackspace} className="p-3.5 text-xl font-bold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-orange to-[#d35400] text-white hover:from-[#d35400] hover:to-calculator-orange active:scale-95" disabled={loading}>←</button>
 
                 {/* Row 4: Clear and operations */}
-                <button className="btn btn-clear" onClick={handleClear}>C</button>
-                <button className="btn btn-operation" onClick={() => handleBasicOperation('÷')}>÷</button>
-                <button className="btn btn-operation" onClick={() => handleBasicOperation('×')}>×</button>
-                <button className="btn btn-operation" onClick={() => handleBasicOperation('-')}>−</button>
-                <button className="btn btn-operation" onClick={() => handleBasicOperation('+')}>+</button>
+                <button onClick={handleClear} className="p-3.5 text-lg font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-red to-[#c0392b] text-white hover:from-[#c0392b] hover:to-calculator-red active:scale-95" disabled={loading}>C</button>
+                <button onClick={() => handleBasicOperation('÷')} className="p-3.5 text-xl font-bold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-orange to-[#d35400] text-white hover:from-[#d35400] hover:to-calculator-orange active:scale-95" disabled={loading}>÷</button>
+                <button onClick={() => handleBasicOperation('×')} className="p-3.5 text-xl font-bold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-orange to-[#d35400] text-white hover:from-[#d35400] hover:to-calculator-orange active:scale-95" disabled={loading}>×</button>
+                <button onClick={() => handleBasicOperation('-')} className="p-3.5 text-xl font-bold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-orange to-[#d35400] text-white hover:from-[#d35400] hover:to-calculator-orange active:scale-95" disabled={loading}>−</button>
+                <button onClick={() => handleBasicOperation('+')} className="p-3.5 text-xl font-bold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-orange to-[#d35400] text-white hover:from-[#d35400] hover:to-calculator-orange active:scale-95" disabled={loading}>+</button>
 
-                {/* Rows 5-8: Number pad */}
-                <button className="btn btn-number" onClick={() => handleNumberClick('7')}>7</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('8')}>8</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('9')}>9</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('()')}>()</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('%')}>%</button>
+                {/* Number buttons */}
+                {['7', '8', '9', '()', '%', '4', '5', '6', 'π', 'e', '1', '2', '3', '+/-'].map((btn) => (
+                    <button 
+                        key={btn}
+                        onClick={() => handleNumberClick(btn)}
+                        className="p-3.5 text-lg font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-light to-[#bdc3c7] text-calculator-dark hover:from-[#bdc3c7] hover:to-calculator-light active:scale-95"
+                        disabled={loading}
+                    >
+                        {btn}
+                    </button>
+                ))}
 
-                <button className="btn btn-number" onClick={() => handleNumberClick('4')}>4</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('5')}>5</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('6')}>6</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('π')}>π</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('e')}>e</button>
+                {/* Equals button */}
+                <button 
+                    onClick={calculateResult}
+                    className="row-span-2 p-3.5 text-2xl font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-green to-[#229954] text-white hover:from-[#229954] hover:to-calculator-green active:scale-95"
+                    disabled={loading}
+                >
+                    =
+                </button>
 
-                <button className="btn btn-number" onClick={() => handleNumberClick('1')}>1</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('2')}>2</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('3')}>3</button>
-                <button className="btn btn-number" onClick={() => handleNumberClick('+/-')}>+/-</button>
-                <button className="btn btn-equals" onClick={calculateResult}>=</button>
-
-                <button className="btn btn-number btn-zero" onClick={() => handleNumberClick('0')}>0</button>
-                <button className="btn btn-number" onClick={handleDecimalClick}>.</button>
-                <button className="btn btn-number">Ans</button>
+                {/* Last row */}
+                <button onClick={() => handleNumberClick('0')} className="col-span-2 p-3.5 text-lg font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-light to-[#bdc3c7] text-calculator-dark hover:from-[#bdc3c7] hover:to-calculator-light active:scale-95" disabled={loading}>0</button>
+                <button onClick={handleDecimalClick} className="p-3.5 text-lg font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-light to-[#bdc3c7] text-calculator-dark hover:from-[#bdc3c7] hover:to-calculator-light active:scale-95" disabled={loading}>.</button>
+                <button className="p-3.5 text-lg font-semibold border-none rounded-lg cursor-pointer transition-all duration-200 shadow-button bg-gradient-to-br from-calculator-light to-[#bdc3c7] text-calculator-dark hover:from-[#bdc3c7] hover:to-calculator-light active:scale-95" disabled={loading}>Ans</button>
             </div>
         </div>
     );
