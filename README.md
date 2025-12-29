@@ -1,5 +1,7 @@
 # Scientific Calculator Application
 
+Developed using  https://github.com/github/spec-kit
+
 A full-stack scientific calculator application built with FastAPI backend and React frontend with TypeScript and Tailwind CSS.
 
 ## 📋 Table of Contents
